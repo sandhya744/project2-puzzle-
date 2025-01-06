@@ -32,12 +32,19 @@ function initializeBoard() {
             tile.id = r.toString() + "-" + c.toString();
             tile.src = imgOrder.shift() + ".jpg";
 
+            // Add desktop drag-and-drop events
             tile.addEventListener("dragstart", dragStart);
             tile.addEventListener("dragover", dragOver);
             tile.addEventListener("dragenter", dragEnter);
             tile.addEventListener("dragleave", dragLeave);
             tile.addEventListener("drop", dragDrop);
             tile.addEventListener("dragend", dragEnd);
+
+            // Add mobile touch events
+            tile.addEventListener("touchstart", touchStart);
+            tile.addEventListener("touchmove", touchMove);
+            tile.addEventListener("touchend", touchEnd);
+
             board.append(tile);
         }
     }
@@ -89,10 +96,31 @@ function dragDrop() {
 }
 
 function dragEnd() {
+    swapTiles();
+}
 
-    //  if (!otherTile.src.includes("p3.jpg")) {
-    //     return; // Only allow swapping with the blank tile
-    // }
+// Touch handlers
+function touchStart(e) {
+    e.preventDefault();
+    currTile = e.target;
+}
+
+function touchMove(e) {
+    e.preventDefault();
+    let touch = e.touches[0];
+    let element = document.elementFromPoint(touch.clientX, touch.clientY);
+    if (element && element.tagName === "IMG") {
+        otherTile = element;
+    }
+}
+
+function touchEnd() {
+    swapTiles();
+}
+
+// Swap tiles logic
+function swapTiles() {
+    if (!currTile || !otherTile) return;
 
     let currCoords = currTile.id.split("-");
     let r = parseInt(currCoords[0]);
@@ -118,9 +146,8 @@ function dragEnd() {
 
         turns += 1;
         document.getElementById("turns").innerText = turns;
-           
+    }
+
+    currTile = null;
+    otherTile = null;
 }
-}
-
-
-
