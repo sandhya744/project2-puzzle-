@@ -172,14 +172,32 @@ footer {
 /* Mobile Devices */
 /* Mobile Devices */
 @media (max-width: 599px) {
-    body {
-        padding: 10px;
-        background-color: #f0f8ff; 
-        background-image: url('bgrnd.avif');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
+    @media (max-width: 599px) {
+        body {
+            padding: 10px;
+            background-color: #f0f8ff; 
+            background-image: url('./bgrnd.avif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Ensures it stays in place */
+            min-height: 100vh; /* Ensures full height coverage */
+        }
+    
+        #board {
+            width: 100%;
+            max-width: 360px;
+            height: auto;
+            padding: 10px;
+        }
+    
+        #board img {
+            width: 30%;
+            height: auto;
+            margin: 5px auto;
+        }
     }
+    
 
     #board {
         width: 100%;
