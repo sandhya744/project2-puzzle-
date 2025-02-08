@@ -5,7 +5,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f0f8ff; 
-    background-image: url('./bgrnd.avif');
+    background-image: url('bgrnd.avif');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -170,9 +170,15 @@ footer {
 }
 
 /* Mobile Devices */
+/* Mobile Devices */
 @media (max-width: 599px) {
     body {
         padding: 10px;
+        background-color: #f0f8ff; 
+        background-image: url('bgrnd.avif');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
     }
 
     #board {
@@ -188,6 +194,7 @@ footer {
         margin: 5px auto;
     }
 }
+
 
 /* Large Desktops */
 @media (min-width: 1200px) {

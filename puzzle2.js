@@ -2,7 +2,7 @@ var rows = 3;
 var columns = 3;
 
 var currTile;
-var otherTile; //blank tile
+var otherTile; // blank tile
 
 var turns = 0;
 var imgOrder = ["p4", "p2", "p8", "p5", "p1", "p6", "p7", "p9", "p3"];
@@ -19,12 +19,18 @@ window.onload = function () {
             tile.addEventListener("dragleave", dragLeave);
             tile.addEventListener("drop", dragDrop);
             tile.addEventListener("dragend", dragEnd);
+
+            // Mobile touch event listeners
+            tile.addEventListener("touchstart", touchStart);
+            tile.addEventListener("touchmove", touchMove);
+            tile.addEventListener("touchend", touchEnd);
+
             document.getElementById("board").append(tile);
         }
     }
      
     document.getElementById("scrambleButton").addEventListener("click", scramble);
-}
+};
 
 function dragStart() {
     currTile = this;
@@ -45,9 +51,35 @@ function dragDrop() {
 }
 
 function dragEnd() {
-    // if (!otherTile.src.includes("p3.jpg")) {
+    swapTiles();
+}
+
+// Mobile touch functions
+function touchStart(e) {
+    currTile = e.target;
+}
+
+function touchMove(e) {
+    e.preventDefault();
+    let touch = e.touches[0];
+    let element = document.elementFromPoint(touch.clientX, touch.clientY);
+    if (element && element.tagName === "IMG") {
+        otherTile = element;
+    }
+}
+
+function touchEnd() {
+    swapTiles();
+}
+
+function swapTiles() {
+
+    //   if (!otherTile.src.includes("p3.jpg")) {
     //     return; // Only allow swapping with the blank tile
     // }
+
+    if (!currTile || !otherTile) return;
+
     let currCoords = currTile.id.split("-");
     let r = parseInt(currCoords[0]);
     let c = parseInt(currCoords[1]);
@@ -73,25 +105,20 @@ function dragEnd() {
         turns += 1;
         document.getElementById("turns").innerText = turns;
 
-        // Check if the puzzle is solved
         checkWin();
     }
 }
 
 function scramble() {
-    // Reset turns
     turns = 0;
     document.getElementById("turns").innerText = turns;
 
-    // Clear win message and remove animations
     let winMessage = document.getElementById("winMessage");
     winMessage.innerText = "";
-    winMessage.classList.remove("winAnimation"); // Remove animation class
+    winMessage.classList.remove("winAnimation");
 
-    // Remove the fireworks background
     document.body.classList.remove("fireworks-bg");
 
-    // Scramble the tiles
     imgOrder = ["p4", "p2", "p8", "p5", "p1", "p6", "p7", "p9", "p3"];
     imgOrder.sort(() => Math.random() - 0.5);
 
@@ -102,7 +129,6 @@ function scramble() {
         }
     }
 }
-  
 
 function checkWin() {
     let correctOrder = ["p1.jpg", "p2.jpg", "p3.jpg", "p4.jpg", "p5.jpg", "p6.jpg", "p7.jpg", "p8.jpg", "p9.jpg"];
@@ -122,11 +148,7 @@ function checkWin() {
         let winMessage = document.getElementById("winMessage");
         winMessage.innerText = "🎉🎊 YOU DID IT! 🥳🎊";
         winMessage.classList.add("winAnimation");
-
-        // Fireworks Effect
         createFireworks();
-
-        // Remove the animation after 7 seconds
         setTimeout(() => {
             winMessage.classList.remove("winAnimation");
             document.body.classList.remove("fireworks-bg");
@@ -134,10 +156,6 @@ function checkWin() {
     }
 }
 
-// Fireworks Effect
 function createFireworks() {
     document.body.classList.add("fireworks-bg");
 }
-
-
-
