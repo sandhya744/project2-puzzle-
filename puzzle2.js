@@ -74,9 +74,9 @@ function touchEnd() {
 
 function swapTiles() {
 
-    //   if (!otherTile.src.includes("p3.jpg")) {
-    //     return; // Only allow swapping with the blank tile
-    // }
+      if (!otherTile.src.includes("p3.jpg")) {
+        return; // Only allow swapping with the blank tile
+    }
 
     if (!currTile || !otherTile) return;
 
