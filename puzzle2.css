@@ -1,0 +1,204 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    color: #0c67ae;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f8ff; 
+    background-image: url('./bgrnd.avif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Game Board */
+#board {
+    width: 360px;
+    height: 360px;
+    background-color: lightblue;
+    border: 10px solid #0c67ae;
+    margin: 0 auto;
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+    align-items: center; 
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3); 
+    border-radius: 10px;
+    transition: transform 0.3s ease; 
+}
+
+#board:hover {
+    transform: scale(1.02); 
+}
+
+/* Tiles */
+#board img {
+    width: 118px;
+    height: 118px;
+    border: 1px solid #0c67ae;
+    border-radius: 5px; 
+    cursor: grab; 
+    transition: transform 0.2s, box-shadow 0.2s; 
+}
+
+#board img:active {
+    cursor: grabbing;
+    transform: scale(1.05); 
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4); 
+}
+
+#turns {
+    font-size: 23px;
+    font-weight: bold;
+    color: #09476b;
+    margin-top: 10px;
+}
+
+/* Message */
+#message {
+    font-size: 24px;
+    font-weight: bold;
+    color: #d9534f;
+    margin-top: 20px;
+}
+
+/* Footer or Extra Text (Optional) */
+footer {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #555;
+    text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.7);
+}
+
+/* Scramble Button */
+#scrambleButton {
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #0c67ae;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+}
+
+#scrambleButton:hover {
+    background-color: #085b8e;
+}
+
+#scrambleButton:active {
+    transform: scale(0.98);
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* 🎆 Winning Message Animation */
+.winAnimation {
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px;
+    border-radius: 10px;
+    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    background-size: 300% 300%;
+    animation: glow 1.5s infinite alternate, pulse 1s infinite alternate, bounce 2s infinite, scaleUp 1s ease-in-out;
+}
+
+/* Neon Glow Effect */
+@keyframes glow {
+    from {
+        text-shadow: 0 0 10px yellow, 0 0 20px orange, 0 0 30px red;
+    }
+    to {
+        text-shadow: 0 0 20px red, 0 0 30px orange, 0 0 40px yellow;
+    }
+}
+
+/* Pulsating Effect */
+@keyframes pulse {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.05);
+    }
+}
+
+/* Bouncing Effect */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Scaling Effect */
+@keyframes scaleUp {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* 🎇 Fireworks Background Animation */
+.fireworks-bg {
+    background: url('fireworks.gif') center/cover no-repeat fixed;
+}
+
+
+
+/* Media Queries for Responsiveness */
+
+/* Tablets (Portrait and Landscape) */
+@media (min-width: 600px) and (max-width: 900px) {
+    #board {
+        width: 300px;
+        height: 300px;
+        border: 8px solid #0c67ae;
+    }
+
+    #board img {
+        width: 90px;
+        height: 90px;
+    }
+}
+
+/* Mobile Devices */
+@media (max-width: 599px) {
+    body {
+        padding: 10px;
+    }
+
+    #board {
+        width: 100%;
+        height: auto;
+        padding: 10px;
+        /* flex-direction: column; Stack tiles vertically if needed */
+    }
+
+    #board img {
+        width: 30%;
+        height: auto;
+        margin: 5px auto;
+    }
+}
+
+/* Large Desktops */
+@media (min-width: 1200px) {
+    #board {
+        width: 500px;
+        height: 500px;
+        border: 12px solid #0c67ae;
+    }
+
+    #board img {
+        width: 160px;
+        height: 160px;
+    }
+}
